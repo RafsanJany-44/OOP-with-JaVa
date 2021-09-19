@@ -12,7 +12,6 @@ public class main {
 		int b = in.nextInt();
 		float c = in.nextFloat();
 		float d= (a+b)/c;
-		
 		System.out.println("The ans is "+d);
 		
 		
