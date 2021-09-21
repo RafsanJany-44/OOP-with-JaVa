@@ -8,7 +8,9 @@ public class Main {
 		int a=56,b=56;
 		
 		for(int i=0;i<100;i++) {
-			System.out.println("Hello world");
+			a++;
+			b++;
+			System.out.println(a+" Hello world "+b);
 		}
 	}
 
