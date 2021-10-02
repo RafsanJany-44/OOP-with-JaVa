@@ -34,9 +34,7 @@ public class Main {
 		System.out.println(b);
 		System.out.println(add(5,6));
 		System.out.println(sub(5,6));
-
 		System.out.println(mul(5,6));
-
 		System.out.println(div(5,6));
 
 	}
