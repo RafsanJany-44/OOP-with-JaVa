@@ -1,6 +1,4 @@
-package Lab_Assignment_2_Task_1;
-
-
+package Task_1;
 public class Test {
 
 	public static void main(String[] args) {
@@ -29,3 +27,4 @@ public class Test {
             
     }
 }
+
