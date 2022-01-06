@@ -3,6 +3,7 @@ import java.util.*;
 public class Test {
 
 	public static void main(String[] args) {
+		
 		Scanner input=new Scanner(System.in);
 		
 		int num=input.nextInt();
@@ -12,13 +13,16 @@ public class Test {
                 System.out.println(e);
         }
 	}
-        public static void testException(int sen)throws Exception_1,Exception_2,Exception_3 {
+	
+	
+	
+        public static void testException(int num)throws Exception_1,Exception_2,Exception_3 {
            
-            if(sen==1) 
+            if(num==1) 
             {
             	throw new Exception_1("Throwing Exception 1");
             }
-            else if(sen==2) 
+            else if(num==2) 
             {
             	throw new Exception_2("Throwing Exception 2");
             }
