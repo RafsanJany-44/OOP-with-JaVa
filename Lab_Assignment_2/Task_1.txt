@@ -1,0 +1,58 @@
+
+public class Exception_1 extends Exception {
+    Exception_1(String s){
+        super(s);
+	}
+}
+
+
+public class Exception_2 extends Exception_1 {
+    Exception_2(String s){
+        super(s);
+	}
+}
+
+
+
+public class Exception_3 extends Exception_2 {
+	    Exception_3(String s){
+	        super(s);
+	}
+}
+
+
+import java.util.*;
+public class Test {
+
+	public static void main(String[] args) {
+		
+		Scanner input=new Scanner(System.in);
+		
+		int num=input.nextInt();
+        try {
+                testException(num);
+        } catch (Exception_1 e) {
+                System.out.println(e);
+        }
+	}
+	
+	
+	
+        public static void testException(int num)throws Exception_1,Exception_2,Exception_3 {
+           
+            if(num==1) 
+            {
+            	throw new Exception_1("Throwing Exception 1");
+            }
+            else if(num==2) 
+            {
+            	throw new Exception_2("Throwing Exception 2");
+            }
+                    
+            else {
+            	throw new Exception_3("Throwing Exception 3");
+            }         
+    }
+}
+
+

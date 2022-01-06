@@ -1,0 +1,46 @@
+
+public class A {
+    public void method1() throws Exception {
+        throw new Exception("Exception thrown in Class A");
+	}
+}
+
+
+
+
+
+public class B extends A{
+	@Override
+    public void method1() throws Exception {
+            super.method1();
+   	 }
+}
+
+
+
+
+
+
+
+public class C extends B{
+	@Override
+    public void method1() throws Exception {
+            super.method1();
+    	}
+}
+
+
+
+
+
+
+public class Test {
+
+    public static void main(String[] args) throws Exception {
+            
+    	 C c=new C();
+         A a=((A)c);
+         a.method1();
+
+	}
+}
