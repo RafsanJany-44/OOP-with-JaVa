@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="MID/src"/>
 	<classpathentry kind="src" path="Notepad/src"/>
 	<classpathentry kind="lib" path="Notepad/dist/Notepad.jar"/>
+	<classpathentry excluding="Java_basics/src/|Lab_NSU/src/|MID/src/|Notepad/src/" kind="src" path=""/>
 	<classpathentry kind="output" path="Java_basics/bin"/>
 </classpath>
