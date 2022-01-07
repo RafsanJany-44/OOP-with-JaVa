@@ -14,13 +14,13 @@ public MyDate()
     year=date.getYear();
 }
 
-public MyDate(String s)
-    StringTokenizer st=new StringTokenizer(s,"/");
-    day=Integer.parseInt(st.nextToken());
-    month=Integer.parseInt(st.nextToken());
-    year=Integer.parseInt(st.nextToken());
+public MyDate(String string)
+    StringTokenizer s=new StringTokenizer(string,"/");
+    day=Integer.parseInt(s.nextToken());
+    month=Integer.parseInt(s.nextToken());
+    year=Integer.parseInt(s.nextToken());
 }
-public MyDate(Calendar dt)
+public MyDate(Calendar calender)
 {
     day=dt.get(Calendar.DAY_OF_WEEK);
     month=dt.get(Calendar.MONTH);
