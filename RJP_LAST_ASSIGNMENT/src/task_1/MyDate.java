@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public class MyDate implements Comparable<MyDate>,Cloneable
 {
    int day,month,year;
-  
+
    public MyDate() 
    {
        Date date=new Date();
@@ -14,7 +14,7 @@ public class MyDate implements Comparable<MyDate>,Cloneable
        month=date.getMonth();
        year=date.getYear();
    }
-  
+
    public MyDate(String string)
    {
        StringTokenizer str=new StringTokenizer(string,"/");
@@ -71,35 +71,37 @@ public class MyDate implements Comparable<MyDate>,Cloneable
    {
        return day+"/"+month+"/"+year;
    }
- 
-   
+
    public static void main(String[] args)
    {
-       MyDate x=new MyDate(); 
-       Calendar c=Calendar.getInstance();
-       c.set(2008,07,22);
-       MyDate y=new MyDate(c);
-       MyDate z=new MyDate("27/08/2005");
+       MyDate date1=new MyDate(); 
+       Calendar calender=Calendar.getInstance();
+       calender.set(2016,05,11);
+       MyDate date2=new MyDate(calender);
+       MyDate date3=new MyDate("29/09/2011");
+       
+       date1.setDate(17,05,2020); 
+       System.out.println("Date : "+date1.getDate());
       
-       x.setDate(20,01,2010); 
-       System.out.println("Date : "+x.getDate());
+       System.out.println("Date1: "+date1.toString()); 
+       System.out.println("Date2: "+date2.toString());
+       System.out.println("Date3: "+date3.toString());
       
-       System.out.println("Date1: "+x.toString()); 
-       System.out.println("Date2: "+y.toString());
-       System.out.println("Date3: "+z.toString());
-      
-       MyDate d=(MyDate) x.clone(); 
+       MyDate d=(MyDate) date1.clone(); 
        System.out.println("Copied object:"+d.toString());
-      
-       System.out.println("Difference between date:"+x.difference(z));
-      
-       System.out.println("Compare dates:");   
-       int i=x.compareTo(y);
-       if(i==1)
-           System.out.println("Date1 is greater than date2");
-       else if(i==2)
-           System.out.println("\nDate1 is less than date2");
-       else
+       System.out.println("Difference between date:"+date1.difference(date3));
+       System.out.println("Comparing dates:");
+       int com=date1.compareTo(date2);
+       
+       if(com==1) {
+           System.out.println("Date1 is greater than Date2");
+       }
+       else if(com==2)
+       {
+           System.out.println("\nDate1 is less than Date2");
+       }
+       else {
            System.out.println("\nDates are equal");
+       }
    }
 }
