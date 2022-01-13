@@ -8,36 +8,36 @@ import javax.swing.filechooser.*;
 
 public class Notepad extends JFrame implements ActionListener {
 
-	JTextArea area;     // ekhane text likha hobe
-	JScrollPane pane;	// Scroll pan
-	String text;		// Text input nea hoi
+	JTextArea area;     
+	JScrollPane pane;	
+	String text;		
 
 	Notepad() {
-		setBounds(0, 0, 1950, 1050); // ekhane je window ta on hobe setar size bujhabe 1950X1050
-		JMenuBar menubar = new JMenuBar(); // object creat hoitese
+		setBounds(0, 0, 1950, 1050); 
+		JMenuBar menubar = new JMenuBar(); 
 
-		JMenu file = new JMenu("File");  // File nam e ekta manu item
+		JMenu file = new JMenu("File");  
 
-		JMenuItem newdoc = new JMenuItem("New"); // New nam e ekta sub manu item
+		JMenuItem newdoc = new JMenuItem("New"); 
 		newdoc.addActionListener(this);
 
-		JMenuItem open = new JMenuItem("Open"); // Open nam e ekta sub manu item
+		JMenuItem open = new JMenuItem("Open"); 
 		open.addActionListener(this);
 
-		JMenuItem save = new JMenuItem("Save"); // Save nam e ekta sub manu item
+		JMenuItem save = new JMenuItem("Save"); 
 		save.addActionListener(this);
 
-		JMenuItem print = new JMenuItem("Print"); // Print nam e ekta sub manu item
+		JMenuItem print = new JMenuItem("Print");
 		print.addActionListener(this);
 
-		JMenuItem exit = new JMenuItem("Exit"); // Exit nam e ekta sub manu item
+		JMenuItem exit = new JMenuItem("Exit"); 
 		exit.addActionListener(this);
 
-		file.add(newdoc);   // newdoc sub manue ke  File menu te add kortese
-		file.add(open); 	// newdoc sub manue ke  File menu te add kortese
-		file.add(save);		// newdoc sub manue ke  File menu te add kortese
-		file.add(print);	// newdoc sub manue ke  File menu te add kortese
-		file.add(exit);		// newdoc sub manue ke  File menu te add kortese
+		file.add(newdoc);  
+		file.add(open); 	
+		file.add(save);		
+		file.add(print);	
+		file.add(exit);		
 
 		JMenu edit = new JMenu("Edit");
 
