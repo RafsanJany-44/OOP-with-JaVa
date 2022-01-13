@@ -1,163 +1,147 @@
 package notepad;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 import java.io.*;
 import javax.swing.filechooser.*;
 
 public class Notepad extends JFrame implements ActionListener {
 
-    private JTextArea area;
-    private JScrollPane scpane;
-    String text = "";
-    public Notepad() {
-        super("Notepad");
-        setSize(1950, 1050);
-        
-        setLayout(new BorderLayout());
+	JTextArea area;     // ekhane text likha hobe
+	JScrollPane pane;	// Scroll pan
+	String text;		// Text input nea hoi
 
-        JMenuBar menuBar = new JMenuBar(); //menubar
-        
-        JMenu file = new JMenu("File"); //file menu
-        
-        JMenuItem newdoc = new JMenuItem("New");
-        newdoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-        newdoc.addActionListener(this);
-        
-        JMenuItem open = new JMenuItem("Open");
-        open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-        open.addActionListener(this);
-        
-        JMenuItem save = new JMenuItem("Save");
-        save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-        save.addActionListener(this);
-        
-        JMenuItem print = new JMenuItem("Print");
-        print.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-        print.addActionListener(this);
-        
-        JMenuItem exit = new JMenuItem("Exit");
-        exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
-        exit.addActionListener(this);
-        
-        JMenu edit = new JMenu("Edit");
-        
-        JMenuItem copy = new JMenuItem("Copy");
-        copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-        copy.addActionListener(this);
-        
-        JMenuItem paste = new JMenuItem("Paste");
-        paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
-        paste.addActionListener(this);
-        
-        JMenuItem cut = new JMenuItem("Cut");
-        cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
-        cut.addActionListener(this);
-        
-        JMenuItem selectall = new JMenuItem("Select All");
-        selectall.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-        selectall.addActionListener(this);
-        
-        
-        JMenu about = new JMenu("Help");
-        
-        JMenuItem notepad = new JMenuItem("About Notepad");
-        notepad.addActionListener(this);
-        
-        area = new JTextArea();
-        area.setFont(new Font("SAN_SERIF", Font.PLAIN, 20));
-        area.setLineWrap(true);
-        area.setWrapStyleWord(true);
-        
-        scpane = new JScrollPane(area); 
-        scpane.setBorder(BorderFactory.createEmptyBorder());
-        
-        setJMenuBar(menuBar);
-        menuBar.add(file);
-        menuBar.add(edit);
-        menuBar.add(about);
+	Notepad() {
+		setBounds(0, 0, 1950, 1050); // ekhane je window ta on hobe setar size bujhabe 1950X1050
+		JMenuBar menubar = new JMenuBar(); // object creat hoitese
 
-        file.add(newdoc);
-        file.add(open);
-        file.add(save);
-        file.add(print);
-        file.add(exit);
-        
-        edit.add(copy);
-        edit.add(paste);
-        edit.add(cut);
-        edit.add(selectall);
-        
-        about.add(notepad);
+		JMenu file = new JMenu("File");  // File nam e ekta manu item
 
-        add(scpane, BorderLayout.CENTER);
-        setVisible(true);
-    }
+		JMenuItem newdoc = new JMenuItem("New"); // New nam e ekta sub manu item
+		newdoc.addActionListener(this);
 
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getActionCommand().equals("New")) {
-            area.setText("");
-        
-        } else if (ae.getActionCommand().equals("Open")) {
-            JFileChooser chooser = new JFileChooser("D:/Java");
-            chooser.setAcceptAllFileFilterUsed(false); 
-            FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .txt files", "txt"); 
-            chooser.addChoosableFileFilter(restrict);
-    	
-            int result = chooser.showOpenDialog(this);
-            if(result == JFileChooser.APPROVE_OPTION) {
-                File file = chooser.getSelectedFile();
-				
-                try{
-                    System.out.println("HEki");
-                    FileReader reader = new FileReader(file);
-                    BufferedReader br = new BufferedReader(reader);
-                    area.read( br, null );
-                    br.close();
-                    area.requestFocus();
-                }catch(Exception e){
-                    System.out.print(e);
-                }
-            }
-        } else if(ae.getActionCommand().equals("Save")){
-            final JFileChooser SaveAs = new JFileChooser();
-            SaveAs.setApproveButtonText("Save");
-            int actionDialog = SaveAs.showOpenDialog(this);
-            if (actionDialog != JFileChooser.APPROVE_OPTION) {
-                return;
-            }
+		JMenuItem open = new JMenuItem("Open"); // Open nam e ekta sub manu item
+		open.addActionListener(this);
 
-            File fileName = new File(SaveAs.getSelectedFile() + ".txt");
-            BufferedWriter outFile = null;
-            try {
-                outFile = new BufferedWriter(new FileWriter(fileName));
-                area.write(outFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else if(ae.getActionCommand().equals("Print")){
-            try{
-                area.print();
-            }catch(Exception e){}
-        }else if (ae.getActionCommand().equals("Exit")) {
-            System.exit(0);
-        }else if (ae.getActionCommand().equals("Copy")) {
-            text = area.getSelectedText();
-        }else if (ae.getActionCommand().equals("Paste")) {
-            area.insert(text, area.getCaretPosition());
-        }else if (ae.getActionCommand().equals("Cut")) {
-            text = area.getSelectedText();
-            area.replaceRange("", area.getSelectionStart(), area.getSelectionEnd());
-        }else if (ae.getActionCommand().equals("Select All")) {
-            area.selectAll();
-        }else if (ae.getActionCommand().equals("About Notepad")) {
-            new About().setVisible(true);
-            
-        }
-    }
+		JMenuItem save = new JMenuItem("Save"); // Save nam e ekta sub manu item
+		save.addActionListener(this);
 
-    public static void main(String[] args) {
-        new Notepad();
-    }
+		JMenuItem print = new JMenuItem("Print"); // Print nam e ekta sub manu item
+		print.addActionListener(this);
+
+		JMenuItem exit = new JMenuItem("Exit"); // Exit nam e ekta sub manu item
+		exit.addActionListener(this);
+
+		file.add(newdoc);   // newdoc sub manue ke  File menu te add kortese
+		file.add(open); 	// newdoc sub manue ke  File menu te add kortese
+		file.add(save);		// newdoc sub manue ke  File menu te add kortese
+		file.add(print);	// newdoc sub manue ke  File menu te add kortese
+		file.add(exit);		// newdoc sub manue ke  File menu te add kortese
+
+		JMenu edit = new JMenu("Edit");
+
+		JMenuItem copy = new JMenuItem("Copy");
+		copy.addActionListener(this);
+
+		JMenuItem paste = new JMenuItem("Paste");
+		paste.addActionListener(this);
+
+		JMenuItem cut = new JMenuItem("Cut");
+		cut.addActionListener(this);
+
+		JMenuItem selectall = new JMenuItem("Select All");
+		selectall.addActionListener(this);
+
+		edit.add(copy);
+		edit.add(paste);
+		edit.add(cut);
+		edit.add(selectall);
+
+		JMenu help = new JMenu("Help");
+		JMenuItem about = new JMenuItem("About the Notepad");
+		about.addActionListener(this);
+		help.add(about);
+
+		menubar.add(file);
+		menubar.add(edit);
+		menubar.add(help);
+
+		setJMenuBar(menubar);
+
+		area = new JTextArea();
+		area.setFont(new Font("SAN_SERIF", Font.PLAIN, 20));
+		area.setLineWrap(true);
+		area.setWrapStyleWord(true);
+
+		pane = new JScrollPane(area);
+		pane.setBorder(BorderFactory.createEmptyBorder());
+		add(pane, BorderLayout.CENTER);
+
+	}
+
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getActionCommand().equals("New")) {
+			area.setText("");
+		} else if (ae.getActionCommand().equals("Open")) {
+			JFileChooser chooser = new JFileChooser();
+			chooser.setAcceptAllFileFilterUsed(false);
+			FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .txt files", "txt");
+			chooser.addChoosableFileFilter(restrict);
+
+			int action = chooser.showOpenDialog(this);
+			if (action != JFileChooser.APPROVE_OPTION) {
+				return;
+			}
+
+			File file = chooser.getSelectedFile();
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				area.read(reader, null);
+			} catch (Exception e) {
+
+			}
+		} else if (ae.getActionCommand().equals("Save")) {
+			JFileChooser saveas = new JFileChooser();
+			saveas.setApproveButtonText("Save");
+			int action = saveas.showOpenDialog(this);
+			if (action != JFileChooser.APPROVE_OPTION) {
+				return;
+			}
+			File filename = new File(saveas.getSelectedFile() + ".txt");
+			BufferedWriter outFile = null;
+
+			try {
+				outFile = new BufferedWriter(new FileWriter(filename));
+				area.write(outFile);
+			} catch (Exception e) {
+
+			}
+		} else if (ae.getActionCommand().equals("Print")) {
+			try {
+				area.print();
+			} catch (Exception e) {
+
+			}
+		} else if (ae.getActionCommand().equals("Exit")) {
+			System.exit(0);
+		} else if (ae.getActionCommand().equals("Copy")) {
+			text = area.getSelectedText();
+		} else if (ae.getActionCommand().equals("Paste")) {
+			area.insert(text, area.getCaretPosition());
+		} else if (ae.getActionCommand().equals("Cut")) {
+			text = area.getSelectedText();
+			area.replaceRange("", area.getSelectionStart(), area.getSelectionEnd());
+		} else if (ae.getActionCommand().equals("Select All")) {
+			area.selectAll();
+		} else if (ae.getActionCommand().equals("About the Notepad")) {
+			new About().setVisible(true);
+		}
+	}
+
+	public static void main(String[] args) {
+		new Notepad().setVisible(true);
+
+	}
+
 }
